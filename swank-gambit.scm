@@ -315,7 +315,7 @@
     (cond
      ((exception-result? result) #f)
      ((eq? result '#!void) "")
-     (else 
+     (else
       (with-output-to-string "" (lambda () (wr result)))))))
 
 (define (swank:load-file filename)
@@ -1068,7 +1068,7 @@
 (swank-define-op swank:interactive-eval)
 (swank-define-op swank:interactive-eval-region)
 (swank-define-op swank:pprint-eval)
-(swank-define-op swank:invoke-nth-restart-for-emacs) 
+(swank-define-op swank:invoke-nth-restart-for-emacs)
 (swank-define-op swank:load-file)
 (swank-define-op swank:start-swank-server-in-thread)
 (swank-define-op swank:list-threads)
