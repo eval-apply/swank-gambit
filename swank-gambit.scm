@@ -193,7 +193,7 @@
     :lisp-implementation (:name "gambit" :type "Gambit" :version ,(system-version-string))
     :machine (:instance ,(host-name) :type ,(system-type-string))
     :features ()
-    :modules swank-modules
+    :modules ,swank-modules
     :package (:name "#package-name#" :prompt "")
     :version ,swank-wire-protocol-version))
 
