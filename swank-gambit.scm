@@ -206,7 +206,7 @@
               (load (append-strings
                      (list (substring
                             colon-filename
-                            1
+                            0
                             (string-length colon-filename))
                            ".scm")))))
         (loop (cdr modules))))
