@@ -118,7 +118,7 @@
     (write-substring obj-str 0 (string-length obj-str))
     (force-output)))
 
-(define swank-wire-protocol-version 'nil)
+(define swank-wire-protocol-version "2015-06-01")
 
 (define (swank-process-request req)
   (debug (list 'emacs==> req))
@@ -180,18 +180,16 @@
 (define swank-modules '())
 
 (define (swank:connection-info)
-
-  #;
-  (swank-write
-   `(:indentation-update
-     (("with-timeout" . 1)
-      ("without-package-locks" . 0)
-      ("define-source-context" . 2))))
-
   `(:pid ,(##os-getpid)
     :style :spawn
-    :lisp-implementation (:name "gambit" :type "Gambit" :version ,(system-version-string))
-    :machine (:instance ,(host-name) :type ,(system-type-string))
+    :encoding (:coding-systems ("iso-latin-1-unix"))
+    :lisp-implementation (:type "Gambit"
+                          :name "gambit"
+                          :version ,(system-version-string)
+                          :program "gsi")
+    :machine (:instance ,(host-name)
+              :type ,(system-type-string)
+              :version "")
     :features ()
     :modules ,swank-modules
     :package (:name "#package-name#" :prompt "")
