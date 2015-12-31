@@ -599,8 +599,6 @@
 
 ;;;; SLDB
 
-(include "~~lib/_gambit#.scm")
-
 (define (exception-message exc)
   (let ((msg (call-with-output-string
               ""
