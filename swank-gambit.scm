@@ -585,8 +585,8 @@
         (let* ((container (##locat-container locat))
                (path (##container->path container))
                (filepos (##position->filepos (##locat-position locat)))
-               (line (##fixnum.+ (##filepos-line filepos) 1))
-               (col (##fixnum.+ (##filepos-col filepos) 1)))
+               (line (##fx+ (##filepos-line filepos) 1))
+               (col (##fx+ (##filepos-col filepos) 1)))
           (if path
               (list ':location
                     (list ':file path)
