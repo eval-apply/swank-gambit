@@ -454,8 +454,7 @@
               (f (symbol-next x)))
         '()))
 
-  (apply append (map f (cdr (vector->list (##symbol-table))))))
-
+  (fold-right append '() (map f (cdr (vector->list (##symbol-table))))))
 
 (define (swank:simple-completions prefix package)
   (define (f sym)
@@ -466,8 +465,8 @@
           (list name)
           '())))
 
-  (let ((strings (apply append (map f (all-symbols)))))
-    (list (sort strings string<?)
+  (let ((strings (fold-right append '() (map f (all-symbols)))))
+    (list (sort-list strings string<?)
 	  (longest-common-prefix strings))))
 
 (define (longest-common-prefix strings)
