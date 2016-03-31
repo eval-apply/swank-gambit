@@ -1049,6 +1049,9 @@
 (define (frame-var-value frame var)
   'nil)
 
+(define (swank:emacs-interrupt arg)
+  (##thread-interrupt! ##primordial-thread))
+
 ;;;============================================================================
 
 (define-macro (swank-define-op proc-name)
@@ -1056,6 +1059,7 @@
 
 (define swank-op-table (make-table))
 
+(swank-define-op swank:emacs-interrupt)
 (swank-define-op swank:connection-info)
 (swank-define-op swank:swank-require)
 (swank-define-op swank:create-repl)
