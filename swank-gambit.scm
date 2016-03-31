@@ -9,8 +9,8 @@
 
 ;;;============================================================================
 
-(include "~~lib/_gambit#.scm")
-(include "Sort.scm")
+(##include "~~lib/_gambit#.scm")
+(##include "sort.scm")
 
 (macro-readtable-escape-ctrl-chars?-set! ##main-readtable #f)
 
