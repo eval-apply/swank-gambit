@@ -1052,6 +1052,11 @@
 (define (swank:emacs-interrupt arg)
   (##thread-interrupt! ##primordial-thread))
 
+(define (swank:autodoc . args) '("" nil))
+(define (swank:operator-arglist . args) 'nil)
+(define (swank:init-presentations . args) '("" nil))
+(define (swank:buffer-first-change . args) '("" nil))
+
 ;;;============================================================================
 
 (define-macro (swank-define-op proc-name)
@@ -1095,6 +1100,7 @@
 (swank-define-op swank:inspector-reinspect)
 (swank-define-op swank:pprint-inspector-part)
 (swank-define-op swank:find-source-location-for-emacs)
+(swank-define-op swank:init-presentations)
 
 ;; Not yet implemented
 ;;
@@ -1140,7 +1146,7 @@
 ;(swank-define-op swank:apropos-list-for-emacs)
 ;(swank-define-op swank:arglist-for-insertion)
 ;(swank-define-op swank:arglist-string)
-;(swank-define-op swank:autodoc)
+(swank-define-op swank:autodoc)
 ;(swank-define-op swank:describe-definition)
 ;(swank-define-op swank:describe-definition-for-emacs)
 ;(swank-define-op swank:describe-function)
@@ -1173,7 +1179,7 @@
 
 ;; Misc
 
-;(swank-define-op swank:buffer-first-change)
+(swank-define-op swank:buffer-first-change)
 ;(swank-define-op swank:close-connection)
 ;(swank-define-op swank:commit-edited-value)
 ;(swank-define-op swank:compile-file-for-emacs)
@@ -1196,7 +1202,7 @@
 ;(swank-define-op swank:io-speed-test)
 ;(swank-define-op swank:list-asdf-systems)
 ;(swank-define-op swank:operate-on-system-for-emacs)
-;(swank-define-op swank:operator-arglist)
+(swank-define-op swank:operator-arglist)
 ;(swank-define-op swank:package)
 ;(swank-define-op swank:parse-package)
 ;(swank-define-op swank:print-indentation-lossage)
