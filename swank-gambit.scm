@@ -196,17 +196,18 @@
     :version ,swank-wire-protocol-version))
 
 (define (swank:swank-require modules)
-
   (let loop ([modules (if (list? modules) modules (list modules))])
     (if (car modules)
         (if (not (member (car modules) swank-modules))
-            (let ((colon-filename (object->string (car modules))))
-              (load (append-strings
+            (let* ((colon-filename (object->string (car modules)))
+                   (filename (append-strings
                      (list (substring
                             colon-filename
                             0
                             (string-length colon-filename))
-                           ".scm")))))
+                           ".scm"))))
+              (if (file-exists? filename)
+                  (load filename))))
         (loop (cdr modules))))
 
   swank-modules)
