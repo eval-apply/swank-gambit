@@ -255,6 +255,7 @@
     (cond
      ((exception-result? result) #f)
      ((eq? result '#!void) 'nil)
+     ((eq? result '#!eof) 'nil)
      (else
       (*send-repl-results-function* (list result))
       'nil))))
