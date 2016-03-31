@@ -11,6 +11,7 @@
 
 (##include "~~lib/_gambit#.scm")
 (##include "sort.scm")
+(##include "util.scm")
 
 (macro-readtable-escape-ctrl-chars?-set! ##main-readtable #f)
 
@@ -19,39 +20,6 @@
 (define (debug msg)
   (if SWANK-DEBUG
       (pp msg)))
-
-;;; ===========================================================================
-
-(define (unfold p f g seed . maybe-tail-gen)
-  (if (pair? maybe-tail-gen)
-
-      (let ((tail-gen (car maybe-tail-gen)))
-	(if (pair? (cdr maybe-tail-gen))
-	    (apply error "Too many arguments" unfold p f g seed maybe-tail-gen)
-
-	    (let recur ((seed seed))
-	      (if (p seed) (tail-gen seed)
-		  (cons (f seed) (recur (g seed)))))))
-
-      (let recur ((seed seed))
-	(if (p seed) '()
-	    (cons (f seed) (recur (g seed)))))))
-
-(define (take lis k)
-  (let recur ((lis lis) (k k))
-    (if (zero? k) '()
-	(cons (car lis)
-	      (recur (cdr lis) (- k 1))))))
-
-(define (drop lis k)
-  (let iter ((lis lis) (k k))
-    (if (zero? k) lis (iter (cdr lis) (- k 1)))))
-
-(define (drop-right lis k)
-  (let recur ((lag lis) (lead (drop lis k)))
-    (if (pair? lead)
-	(cons (car lag) (recur (cdr lag) (cdr lead)))
-	'())))
 
 ;;;============================================================================
 
