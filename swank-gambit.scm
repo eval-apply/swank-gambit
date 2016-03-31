@@ -259,6 +259,12 @@
       (*send-repl-results-function* (list result))
       'nil))))
 
+(define (swank-repl:create-repl . args)
+  `(,(object->string ##primordial-thread) "gambit"))
+
+(define swank-repl:listener-eval swank:listener-eval)
+
+
 (define (swank:interactive-eval expr-str)
   (swank-do-interactive
    write
@@ -1063,6 +1069,9 @@
   `(table-set! swank-op-table ',proc-name ,proc-name))
 
 (define swank-op-table (make-table))
+
+(swank-define-op swank-repl:create-repl)
+(swank-define-op swank-repl:listener-eval)
 
 (swank-define-op swank:emacs-interrupt)
 (swank-define-op swank:connection-info)
