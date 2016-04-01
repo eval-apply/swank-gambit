@@ -795,7 +795,7 @@
    ;; uninterned-keyword?
    ;; continuation?
    ;; thread-group?
-   ;; foreign?
+   ((foreign? o) (inspect-foreign o))
    ;; socket-info?
    ;; tty?
    ;; fixnum?
@@ -806,7 +806,7 @@
    ;; thread?
    ;; mutex?
    ;; condition-variable?
-   ;; string?
+   ((string? o) (inspect-string o))
    ;; symbol?
    ;; time?
    ;; file-info?
@@ -836,6 +836,14 @@
    ((table? o) (inspect-table o))
    ((box? o) (inspect-box o))
    (else (list (iline "Contents" o)))))
+
+(define (inspect-foreign o)
+  (list (iline "Tag" (foreign-tags o))
+        (iline "Address" (foreign-address o))
+        (iline "Released?" (foreign-released? o))))
+
+(define (inspect-string o)
+  (list (iline "Length" (string-length o))))
 
 (define (inspect-s8vector o)
   (reverse
